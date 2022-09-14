@@ -7,10 +7,13 @@ fastify.get('/car', async (request, reply) => {
     return car
 })
 
+const port = process.env.$PORT || 3000;
+const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.1';
+
 // Run the server!
 async function start() {
     try {
-        await fastify.listen({ port: 3000 })
+        await fastify.listen({ port: port, host: host })
     } catch (err) {
         fastify.log.error(err)
         process.exit(1)
